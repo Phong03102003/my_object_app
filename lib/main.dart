@@ -4,32 +4,36 @@ void main() {
   runApp(const MyApp());
 }
 
+class MyObject {
+  int _value;
+  MyObject(
+    this._value,
+  );
+  // Phương thức tăng giá trị
+  void increment() {
+    _value++;
+  }
+
+  // Phương thức giảm giá trị
+  void decrement() {
+    _value--;
+  }
+
+  int get() {
+    return _value;
+  }
+
+  // Phương thức trả về giá trị hiện tại
+  set value(int value) {
+    this.value = value;
+  }
+}
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
-}
-
-class MyObject {
-  int value;
-  MyObject({
-    required this.value,
-  });
-  // Phương thức tăng giá trị
-  void increment() {
-    value++;
-  }
-
-  // Phương thức giảm giá trị
-  void decrement() {
-    value--;
-  }
-
-  // Phương thức trả về giá trị hiện tại
-  set _value(int newValue) {
-    this.value = newValue;
-  }
 }
 
 class _MyAppState extends State<MyApp> {
@@ -39,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _myObject = MyObject(value: 0);
+    _myObject = MyObject(0);
   }
 
   @override
@@ -55,7 +59,7 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Giá trị: ${_myObject?.value ?? 0}',
+                'Giá trị: ${_myObject?._value ?? 0}',
                 style: const TextStyle(fontSize: 20),
               ),
               Row(
@@ -83,7 +87,7 @@ class _MyAppState extends State<MyApp> {
                       _myObject?._value = 10; // Gọi phương thức set _value
                       setState(() {});
                     },
-                    child: const Text('Đặt lại'),
+                    child: const Icon(Icons.restart_alt),
                   ),
                 ],
               ),
